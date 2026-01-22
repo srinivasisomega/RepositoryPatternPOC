@@ -27,6 +27,7 @@ namespace Application.Services
                     Id = e.Id,
                     Name = e.Name,
                     Email = e.Email,
+                    Designation = e.Designation,
                     RegistrationDate = e.RegistrationDate
                 });
             }
@@ -41,6 +42,7 @@ namespace Application.Services
                     Id = employee.Id,
                     Name = employee.Name,
                     Email = employee.Email,
+                    Designation = employee.Designation,
                     RegistrationDate = employee.RegistrationDate
                 };
             }
@@ -51,7 +53,8 @@ namespace Application.Services
                 {
                     Name = dto.Name,
                     Email = dto.Email,
-                    RegistrationDate = DateTime.UtcNow
+                    RegistrationDate = DateTime.UtcNow,
+                    Designation = dto.Designation
                 };
 
                 await _repository.AddAsync(employee);
@@ -66,6 +69,7 @@ namespace Application.Services
 
                 employee.Name = dto.Name;
                 employee.Email = dto.Email;
+            employee.Designation = dto.designation;
 
                  _repository.UpdateAsync(employee);
             }
