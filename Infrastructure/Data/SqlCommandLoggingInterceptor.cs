@@ -13,14 +13,13 @@ namespace Infrastructure.Data
         public class SqlCommandLoggingInterceptor : DbCommandInterceptor
         {
             private readonly ILogger<SqlCommandLoggingInterceptor> _logger;
-            private const int SlowQueryThresholdMs = 500; // tune as needed
+            private const int SlowQueryThresholdMs = 500; 
 
             public SqlCommandLoggingInterceptor(ILogger<SqlCommandLoggingInterceptor> logger)
             {
                 _logger = logger;
             }
 
-            // Sync handlers
             public override DbDataReader ReaderExecuted(DbCommand command, CommandExecutedEventData eventData, DbDataReader result)
             {
                 LogCommand(command, eventData);
@@ -39,7 +38,6 @@ namespace Infrastructure.Data
                 return base.ScalarExecuted(command, eventData, result);
             }
 
-            // Async handlers
             public override ValueTask<DbDataReader> ReaderExecutedAsync(
                 DbCommand command,
                 CommandExecutedEventData eventData,

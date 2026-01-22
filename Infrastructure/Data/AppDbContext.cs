@@ -1,5 +1,4 @@
-﻿// Infrastructure/Data/AppDbContext.cs
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,6 @@ namespace Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        // Central logger factory used by DI registration (console for demo)
         public static readonly ILoggerFactory EfLoggerFactory =
             LoggerFactory.Create(builder =>
             {
@@ -22,7 +20,6 @@ namespace Infrastructure.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-            // Subscribe to DbContext-level events (useful for audits / POC)
             SavingChanges += AppDbContext_SavingChanges;
             SavedChanges += AppDbContext_SavedChanges;
             SaveChangesFailed += AppDbContext_SaveChangesFailed;
@@ -31,7 +28,6 @@ namespace Infrastructure.Data
             ChangeTracker.StateChanged += ChangeTracker_StateChanged;
         }
 
-        // Your existing DbSets
         public DbSet<Employee> Employees => Set<Employee>();
 
         #region EF Event Handlers (POC)
